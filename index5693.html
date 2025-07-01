@@ -1,0 +1,650 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMR PRINT HOUSE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .sinhala-text {
+            font-family: 'Noto Sans Sinhala', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .dark-gradient {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        }
+        
+        .nav-item {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-item:hover {
+            transform: translateY(-2px);
+            color: #667eea;
+        }
+        
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        .nav-item:hover::after {
+            width: 100%;
+        }
+        
+        .btn-animated {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+        }
+        
+        .btn-animated::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .btn-animated:hover::before {
+            left: 100%;
+        }
+        
+        .btn-animated:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+        
+        .service-card {
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #667eea;
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .typewriter {
+            overflow: hidden;
+            border-right: .15em solid #667eea;
+            white-space: nowrap;
+            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #667eea; }
+        }
+        
+        .page {
+            display: none;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        .comment-box {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin: 10px 0;
+            padding: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .comment-box:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #667eea;
+        }
+        
+        .whatsapp-btn {
+            background: #25d366;
+            transition: all 0.3s ease;
+        }
+        
+        .whatsapp-btn:hover {
+            background: #20ba5a;
+            transform: scale(1.05);
+        }
+        
+        .file-input-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 8px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .file-input-wrapper:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .file-input-wrapper input[type=file] {
+            position: absolute;
+            left: -9999px;
+        }
+    </style>
+</head>
+<body class="dark-gradient text-white min-h-screen">
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-gray-900 bg-opacity-90 backdrop-blur-md">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-bold">
+                    <span class="gradient-bg bg-clip-text text-transparent">IMR PRINT HOUSE</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#" class="nav-item cursor-pointer" onclick="showPage('home')">Home</a>
+                    <a href="#" class="nav-item cursor-pointer" onclick="showPage('services')">Services</a>
+                    <a href="#" class="nav-item cursor-pointer" onclick="showPage('about')">About</a>
+                    <a href="#" class="nav-item cursor-pointer" onclick="showPage('contact')">Contact</a>
+                </div>
+                <div class="md:hidden">
+                    <button onclick="toggleMobileMenu()" class="text-white">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="hidden md:hidden mt-4 space-y-4">
+                <a href="#" class="block nav-item" onclick="showPage('home'); toggleMobileMenu()">Home</a>
+                <a href="#" class="block nav-item" onclick="showPage('services'); toggleMobileMenu()">Services</a>
+                <a href="#" class="block nav-item" onclick="showPage('about'); toggleMobileMenu()">About</a>
+                <a href="#" class="block nav-item" onclick="showPage('contact'); toggleMobileMenu()">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="home" class="page active">
+        <!-- Hero Section -->
+        <section class="min-h-screen flex items-center justify-center pt-20">
+            <div class="container mx-auto px-6 text-center">
+                <div class="floating">
+                    <i class="fas fa-print text-6xl mb-8 text-purple-400"></i>
+                </div>
+                <h1 class="text-5xl md:text-7xl font-bold mb-6">
+                    <span class="typewriter">IMR PRINT HOUSE</span>
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 opacity-80">
+                    Professional Printing Services with Creative Excellence
+                </p>
+                <button onclick="showPage('contact')" class="btn-animated px-8 py-4 text-lg font-semibold rounded-full text-white border-0">
+                    Start Your Project
+                </button>
+            </div>
+        </section>
+
+        <!-- Customer Ideas Section -->
+        <section class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <i class="fas fa-lightbulb text-4xl mb-4 text-yellow-400"></i>
+                     <h2 class="text-4xl font-bold mb-4 sinhala-text">Customer Ideas - පාරිභෝගික අදහස්</h2>
+                    <p class="text-lg opacity-80 sinhala-text">ඔබගේ නිර්මාණාත්මක අදහස් අප සමඟ බෙදා ගන්න</p>
+                </div>
+                
+                <div class="max-w-2xl mx-auto mb-8">
+                    <div class="service-card p-6 rounded-lg">
+                        <textarea id="ideaInput" placeholder="ඔබගේ මුද්‍රණ අදහස බෙදා ගන්න..." class="w-full p-4 bg-transparent border border-gray-600 rounded-lg text-white placeholder-gray-400 resize-none h-32 sinhala-text"></textarea>
+                        <div class="mt-4 flex flex-col sm:flex-row gap-4">
+                            <input type="text" id="ideaName" placeholder="ඔබගේ නම" class="flex-1 p-3 bg-transparent border border-gray-600 rounded-lg text-white placeholder-gray-400 sinhala-text">
+                            <button onclick="addIdea()" class="btn-animated px-6 py-3 rounded-lg text-white sinhala-text">SEND IDEA - අදහස යොමු කරන්න</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mb-6">
+                    <button onclick="toggleIdeas()" id="viewIdeasBtn" class="btn-animated px-6 py-3 rounded-lg text-white sinhala-text">
+                          View Customer Ideas
+                    </button>
+                </div>
+                
+                <div id="ideasContainer" class="max-w-4xl mx-auto hidden">
+                    <div id="ideasList" class="space-y-4">
+                        <!-- Ideas will be displayed here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Services Page -->
+    <div id="services" class="page">
+        <section class="min-h-screen pt-28 pb-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h1 class="text-5xl font-bold mb-4 sinhala-text">Services</h1>
+                    <p class="text-xl opacity-80 sinhala-text">අපගේ විශේෂ මුද්‍රණ සේවාවන්</p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="service-card p-8 rounded-lg text-center">
+                        <i class="fas fa-file-alt text-4xl mb-4 text-blue-400"></i>
+                        <h3 class="text-xl font-semibold mb-4">All A4 Type Printing</h3>
+                        <p class="opacity-80 sinhala-text">සියලුම A4 ප්‍රමාණයේ ලේඛන මුද්‍රණය, ඉහළ ගුණත්වයකින් සහ වේගයෙන්</p>
+                    </div>
+                    
+                    <div class="service-card p-8 rounded-lg text-center">
+                        <i class="fas fa-id-card text-4xl mb-4 text-green-400"></i>
+                        <h3 class="text-xl font-semibold mb-4">Class Fee Card Design</h3>
+                        <p class="opacity-80 sinhala-text">පන්ති ගාස්තු කාඩ්පත් නිර්මාණය, ආකර්ෂණීය සහ වෘත්තීය පෙනුමකින්</p>
+                    </div>
+                    
+                    <div class="service-card p-8 rounded-lg text-center">
+                        <i class="fas fa-palette text-4xl mb-4 text-purple-400"></i>
+                        <h3 class="text-xl font-semibold mb-4">Custom Designs</h3>
+                        <p class="opacity-80 sinhala-text">ඔබේ අවශ්‍යතාවයට අනුකූල විශේෂ නිර්මාණ සේවාවන්</p>
+                    </div>
+                    
+                    <div class="service-card p-8 rounded-lg text-center">
+                        <i class="fas fa-certificate text-4xl mb-4 text-yellow-400"></i>
+                        <h3 class="text-xl font-semibold mb-4">Certificates</h3>
+                        <p class="opacity-80 sinhala-text">සහතික  පත්‍ර මුද්‍රණය, විශේෂ අවස්ථා සඳහා</p>
+                    </div>
+                    
+                    <div class="service-card p-8 rounded-lg text-center">
+                        <i class="fas fa-paint-brush text-4xl mb-4 text-red-400"></i>
+                        <h3 class="text-xl font-semibold mb-4">Graphic Design</h3>
+                        <p class="opacity-80 sinhala-text">ග්‍රැෆික් නිර්මාණ සේවාවන්</p>
+                    </div>
+                    
+                    <div class="service-card p-8 rounded-lg text-center">
+                        <i class="fas fa-print text-4xl mb-4 text-indigo-400"></i>
+                        <h3 class="text-xl font-semibold mb-4">Printing</h3>
+                        <p class="opacity-80 sinhala-text">සියලුම ප්‍රමාණයේ මුද්‍රණ සේවාවන්, ඉහළ ගුණත්වයකින්</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- About Page -->
+    <div id="about" class="page">
+        <section class="min-h-screen pt-28 pb-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h1 class="text-5xl font-bold mb-4 sinhala-text">About Us</h1>
+                    <p class="text-xl opacity-80 sinhala-text">IMR PRINT HOUSE - ඔබේ විශ්වාසනීය මුද්‍රණ සහකරු</p>
+                </div>
+                
+                <div class="max-w-4xl mx-auto">
+                    <div class="service-card p-12 rounded-lg text-center">
+                        <div class="floating mb-8">
+                            <i class="fas fa-award text-6xl text-gold-400"></i>
+                        </div>
+                        <h2 class="text-3xl font-bold mb-6 sinhala-text">අපගේ ගුණත්වය සහ සේවාව</h2>
+                        <p class="text-lg leading-relaxed mb-8 opacity-90 sinhala-text">
+                            IMR PRINT HOUSE යනු අප ප්‍රදේශයේ ප්‍රමුඛතම මුද්‍රණ සේවා සපයන ආයතනයකි. IMR PRINT HOUSE වෙතින් ඔබට ගුණාත්මක හා තාක්ෂණයත් සමග මුද්‍රණ සේවා ලබා ගත හැකිය.ඒවගේම IMR PRINT HOUSE වෙතින් ඔබට පහසු සහ සහනදායී මිලකට මුද්‍රණ සේවය ලබා ගත හැකිය.තවද කාල කළමණාකරණය ඉහළය.
+                        </p>
+                        
+                        <div class="grid md:grid-cols-3 gap-8 mt-12">
+                            <div class="text-center">
+                                <i class="fas fa-clock text-3xl mb-4 text-blue-400"></i>
+                                <h3 class="text-xl font-semibold mb-2 sinhala-text">වේගවත් සේවාව</h3>
+                                <p class="opacity-80 sinhala-text">කාලයට ගරු කරමින් ගුණත්වය සහිතව</p>
+                            </div>
+                            <div class="text-center">
+                                <i class="fas fa-star text-3xl mb-4 text-yellow-400"></i>
+                                <h3 class="text-xl font-semibold mb-2 sinhala-text">ඉහළ ගුණත්වය</h3>
+                                <p class="opacity-80 sinhala-text">නවීන මුද්‍රණ තාක්‍ෂණය</p>
+                            </div>
+                            <div class="text-center">
+                                <i class="fas fa-handshake text-3xl mb-4 text-green-400"></i>
+                                <h3 class="text-xl font-semibold mb-2 sinhala-text">විශ්වාසනීය සේවාව</h3>
+                                <p class="opacity-80 sinhala-text">ගනුදෙනුකරුවන්ගේ සම්පූර්ණ තෘප්තිමත් භාවය</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-12">
+                            <h3 class="text-2xl font-bold mb-4 sinhala-text">අප හමුවන්න</h3>
+                            <div class="grid md:grid-cols-3 gap-4 text-lg">
+                                <div class="service-card p-4 rounded-lg">
+                                    <i class="fas fa-map-marker-alt mr-2 text-red-400"></i>
+                                    <span class="sinhala-text">මහකුඹුර</span>
+                                </div>
+                                <div class="service-card p-4 rounded-lg">
+                                    <i class="fas fa-map-marker-alt mr-2 text-red-400"></i>
+                                    <span class="sinhala-text">තුප්පිටිය</span>
+                                </div>
+                                <div class="service-card p-4 rounded-lg">
+                                    <i class="fas fa-map-marker-alt mr-2 text-red-400"></i>
+                                    <span class="sinhala-text">බඹරපාන</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Contact Page -->
+    <div id="contact" class="page">
+        <section class="min-h-screen pt-28 pb-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h1 class="text-5xl font-bold mb-4">Contact Us</h1>
+                    <p class="text-xl opacity-80">Get in touch for your printing needs</p>
+                </div>
+                
+                <div class="max-w-2xl mx-auto">
+                    <div class="service-card p-8 rounded-lg">
+                        <form id="contactForm" class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Name</label>
+                                <input type="text" id="contactName" required class="w-full p-3 bg-transparent border border-gray-600 rounded-lg text-white placeholder-gray-400" placeholder="Your Name">
+                            </div>
+                            
+                         <div>
+                                <label class="block text-sm font-medium mb-2">Email</label>
+                                <input type="email" id="contactEmail" required class="w-full p-3 bg-transparent border border-gray-600 rounded-lg text-white placeholder-gray-400" placeholder="your.email@example.com">
+                            </div>
+                            
+                            
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Message</label>
+                                <textarea id="contactMessage" required class="w-full p-3 bg-transparent border border-gray-600 rounded-lg text-white placeholder-gray-400 resize-none h-32" placeholder="Describe your printing requirements..."></textarea>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Attach Files (Documents/Images)</label>
+                                <div class="file-input-wrapper" onclick="document.getElementById('fileInput').click()">
+                                    <input type="file" id="fileInput" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.gif,.txt,.xlsx,.xls">
+                                    <span class="text-white"><i class="fas fa-paperclip mr-2"></i>Choose Files</span>
+                                </div>
+                                <div id="fileList" class="mt-4 space-y-2"></div>
+                            </div>
+                            
+                            <div class="text-center text-sm opacity-80 mb-4 sinhala-text">
+                                <i class="fas fa-info-circle mr-2"></i>
+                                මුද්‍රණය කිරීමට අවශ්‍ය තොරතුරු දැන්ම අපට එවන්න.තොරතුරු අපට එවීම සදහා පහත ඇති Send Message බටන් එක click කරන්න
+                            </div>
+                            
+                            <button type="submit" class="w-full btn-animated py-3 rounded-lg text-white font-semibold">
+                                <i class="fas fa-paper-plane mr-2"></i>Send Message
+                            </button>
+                        </form>
+                        
+                        <div class="mt-8 pt-8 border-t border-gray-600">
+                            <div class="text-center">
+                               <head>
+  <h3 class="text-xl font-semibold mb-4 font-sinhala" style="font-size: 25px; color: #eab308;">
+  අප සමග WhatsApp හා Call හරහා සම්බන්ධ වන්න
+</h3>
+</body>
+<h4 class="text-xl font-semibold mb-4 sinhala-text" style="font-size: 15px; color: #ef4444;">
+    නමුත් ඔබට Call වලට වඩා WhatsApp වලින් සම්බන්ධ වීම පහසු හා වේගවත් විය හැකිය.
+</h4>
+                                <a href="https://wa.me/94714224318?text=නම සහ මුද්‍රණය කිරීමට අවශ්‍ය තොරතුරු දැන්ම එවන්න.තොරතුරු අපට එවීම සදහා Send Message ක්ලික් කරන්න  " 
+                                   class="whatsapp-btn inline-flex items-center px-6 py-3 rounded-lg text-white font-semibold">
+                                    <i class="fab fa-whatsapp mr-2 text-xl"></i>
+                                    0714224318
+
+
+                                                                      <style>
+                                                                 . call-button {
+                                                                       display: inline-flex;
+                                                          align-items: center;
+                                                          padding: 10px 15px;
+                                                       background-color: #4CAF50;
+                                                           color: white;
+                                                       text-decoration: none;
+                                                                border-radius: 5px;
+                                                       font-weight: bold;
+                                 }
+  
+                                                      .call-button i {
+                                                         margin-right: 8px;
+                                     }
+                                  </style>
+
+<a href="tel:0714224318" class="call-button">
+  <i class="fas fa-phone"></i> Call Us: 0714224318
+</a>
+<!-- This will only show on mobile devices -->
+<style>
+  @media (max-width: 768px) {
+    .mobile-call {
+      display: block;
+    }
+  }
+  .mobile-call {
+    display: none;
+  }
+</style>
+
+<a href="tel:0714224318" class="mobile-call">
+  <i class="fas fa-phone"></i> Tap to Call
+</a>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        let customerIdeas = [];
+        let selectedFiles = [];
+        
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Close mobile menu if open
+            document.getElementById('mobileMenu').classList.add('hidden');
+        }
+        
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+        
+        function addIdea() {
+            const name = document.getElementById('ideaName').value.trim();
+            const idea = document.getElementById('ideaInput').value.trim();
+            
+            if (name && idea) {
+                customerIdeas.unshift({
+                    name: name,
+                    idea: idea,
+                    timestamp: new Date().toLocaleDateString()
+                });
+                
+                document.getElementById('ideaName').value = '';
+                document.getElementById('ideaInput').value = '';
+                
+                updateIdeasDisplay();
+                
+                // Show success message
+                const button = event.target;
+                const originalText = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-check mr-2"></i>Added!';
+                button.style.background = '#10b981';
+                
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.style.background = '';
+                }, 2000);
+            } else {
+                alert('Please enter both name and idea!');
+            }
+        }
+        
+        function toggleIdeas() {
+            const container = document.getElementById('ideasContainer');
+            const button = document.getElementById('viewIdeasBtn');
+            
+            if (container.classList.contains('hidden')) {
+                container.classList.remove('hidden');
+                button.innerHTML = 'Hide Customer Ideas';
+                updateIdeasDisplay();
+            } else {
+                container.classList.add('hidden');
+                button.innerHTML = 'View Customer Ideas';
+            }
+        }
+        
+        function updateIdeasDisplay() {
+            const ideasList = document.getElementById('ideasList');
+            ideasList.innerHTML = '';
+            
+            if (customerIdeas.length === 0) {
+                ideasList.innerHTML = '<p class="text-center opacity-60">No ideas shared yet. Be the first!</p>';
+                return;
+            }
+            
+            customerIdeas.forEach((item, index) => {
+                const ideaDiv = document.createElement('div');
+                ideaDiv.className = 'comment-box';
+                ideaDiv.innerHTML = `
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-purple-400 to-blue-500 flex items-center justify-center text-white font-bold">
+                            ${item.name.charAt(0).toUpperCase()}
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center space-x-2 mb-2">
+                                <h4 class="font-semibold text-purple-300">${item.name}</h4>
+                                <span class="text-xs opacity-60">${item.timestamp}</span>
+                            </div>
+                            <p class="opacity-90">${item.idea}</p>
+                        </div>
+                        <i class="fas fa-lightbulb text-yellow-400"></i>
+                    </div>
+                `;
+                ideasList.appendChild(ideaDiv);
+            });
+        }
+        
+        // File handling
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const fileList = document.getElementById('fileList');
+            const files = Array.from(e.target.files);
+            
+            if (files.length > 0) {
+                fileList.innerHTML = files.map(file => 
+                    `<div class="flex items-center space-x-2 mt-1">
+                        <i class="fas fa-file text-blue-400"></i>
+                        <span>${file.name}</span>
+                    </div>`
+                ).join('');
+            } else {
+                fileList.innerHTML = '';
+            }
+        });
+        
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('contactName').value;
+            const email = document.getElementById('contactEmail').value;
+            const message = document.getElementById('contactMessage').value;
+            const files = document.getElementById('fileInput').files;
+            
+            let whatsappMessage = `නම: ${name}\nEmail: ${email}\nMessage: ${message}`;
+            
+            if (files.length > 0) {
+                whatsappMessage += `\n\nFiles attached: ${Array.from(files).map(f => f.name).join(', ')}`;
+                whatsappMessage += '\n(ගොනු WhatsApp එකට වෙන්ව එවන්න)';
+            }
+            
+            const whatsappUrl = `https://wa.me/94714224318?text=${encodeURIComponent(whatsappMessage)}`;
+            window.open(whatsappUrl, '_blank');
+            
+            // Reset form
+            document.getElementById('contactForm').reset();
+            document.getElementById('fileList').innerHTML = '';
+            
+            // Show success message
+            const button = e.target.querySelector('button[type="submit"]');
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-check mr-2"></i>Sent to WhatsApp!';
+            button.style.background = '#10b981';
+            
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.style.background = '';
+            }, 3000);
+        });
+        
+        // Initialize ideas display
+        updateIdeasDisplay();
+        
+        // Smooth scrolling and animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add loading animation
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 1s ease';
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+        
+        // Add parallax effect
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.floating');
+            if (parallax) {
+                parallax.style.transform = `translateY(${scrolled * 0.1}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
